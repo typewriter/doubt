@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
 source 'https://rubygems.org'
 
@@ -12,5 +12,5 @@ gem 'faraday'
 
 gem 'sanitize'
 
-gem 'classifier-reborn'
+gem 'classifier-reborn', github: "jekyll/classifier-reborn"
 gem 'natto'

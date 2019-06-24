@@ -1,9 +1,14 @@
+GIT
+  remote: https://github.com/jekyll/classifier-reborn
+  revision: 849ba0834c5a9be78147a9072e599187e2203fce
+  specs:
+    classifier-reborn (2.2.0)
+      fast-stemmer (~> 1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
     backports (3.15.0)
-    classifier-reborn (2.2.0)
-      fast-stemmer (~> 1.0)
     crass (1.0.4)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
@@ -46,7 +51,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  classifier-reborn
+  classifier-reborn!
   faraday
   natto
   sanitize
