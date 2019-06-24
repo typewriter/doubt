@@ -4,12 +4,12 @@ require 'sinatra'
 require 'sinatra/param'
 require 'sinatra/reloader' if development?
 
-require 'natto'
 require 'classifier-reborn'
-
 require 'sanitize'
 
 require 'faraday'
+
+require './tokenizer.rb'
 
 get '/' do
   'hello world!'
@@ -28,9 +28,7 @@ post '/tokenize' do
          end
 
   text = Sanitize.clean(html)
-
-  nm = Natto::MeCab.new
-  nm.enum_parse(text).map { |n| n.surface }.join(',')
+  JapaneseTokenizer.call(text).join(',')
 end
 
 post '/classify' do
