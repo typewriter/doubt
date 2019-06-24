@@ -33,20 +33,55 @@ end
 
 post '/classify' do
   headers 'Access-Control-Allow-Origin' => '*'
-  param :key, String, required: true
+  param :key, String, format: /^[A-Z0-9]+$/, required: true
   param :data, String
   param :url, String
 
-  'Not implemented'
+  html = if params[:data]
+           params[:data]
+         else
+           html = Faraday.get(params[:url])&.body&.force_encoding('utf-8')
+         end
+
+  text = Sanitize.clean(html)
+
+  filename = "./#{params[:key]}.dat"
+  classifier = if File.exist?(filename)
+                 Marshal.load(File.read(filename))
+               else
+                 halt 400, 'key not found'
+               end
+
+  content_type :json
+  (classifier.classifications text).to_json
 end
 
 post '/learn' do
   headers 'Access-Control-Allow-Origin' => '*'
-  param :key, String, required: true
+  param :key, String, format: /^[A-Z0-9]+$/, required: true
   param :data, String
   param :url, String
-  param :class, String, required: true
+  param :class, String, format: /Like|Dislike/, required: true
 
-  'Not implemented'
+  html = if params[:data]
+           params[:data]
+         else
+           html = Faraday.get(params[:url])&.body&.force_encoding('utf-8')
+         end
+
+  text = Sanitize.clean(html)
+
+  filename = "./#{params[:key]}.dat"
+  classifier = if File.exist?(filename)
+                 Marshal.load(File.read(filename))
+               else
+                 ClassifierReborn::Bayes.new tokenizer: JapaneseTokenizer
+               end
+
+  classifier.train params[:class], text
+
+  File.open(filename, "w") { |f| f.write Marshal.dump(classifier) }
+
+  "Learned #{params[:class]}"
 end
 
