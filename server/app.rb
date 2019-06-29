@@ -44,6 +44,7 @@ post '/classify' do
          end
 
   text = Sanitize.clean(html)
+  text = text[0,16384] if text.size > 16384 # Avoid performance issue
 
   filename = "./#{params[:key]}.dat"
   classifier = if File.exist?(filename)
@@ -70,6 +71,7 @@ post '/learn' do
          end
 
   text = Sanitize.clean(html)
+  text = text[0,16384] if text.size > 16384 # Avoid performance issue
 
   filename = "./#{params[:key]}.dat"
   classifier = if File.exist?(filename)
