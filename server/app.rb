@@ -33,7 +33,7 @@ end
 
 post '/classify' do
   headers 'Access-Control-Allow-Origin' => '*'
-  param :key, String, format: /^[A-Z0-9]+$/, required: true
+  param :key, String, format: /^[a-zA-Z0-9\-]+$/, required: true
   param :data, String
   param :url, String
 
@@ -59,7 +59,7 @@ end
 
 post '/learn' do
   headers 'Access-Control-Allow-Origin' => '*'
-  param :key, String, format: /^[A-Z0-9]+$/, required: true
+  param :key, String, format: /^[a-zA-Z0-9\-]+$/, required: true
   param :data, String
   param :url, String
   param :class, String, format: /Like|Dislike/, required: true
