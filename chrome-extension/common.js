@@ -30,7 +30,7 @@ function restore_options(fn) {
     let server = items.server;
     let key = items.key;
     if (items.server == null) {
-      server = 'https://shika.nyamikan.net'
+      server = 'https://shika.nyamikan.net/doubt'
       key = generateUuid();
       save_options(server, key);
     }

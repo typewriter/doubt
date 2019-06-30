@@ -36,7 +36,7 @@ function save_options() {
 // stored in chrome.storage.
 function restore_options() {
   chrome.storage.sync.get({
-    server: 'https://shika.nyamikan.net/',
+    server: 'https://shika.nyamikan.net/doubt',
     key: generateUuid()
   }, function(items) {
     document.getElementById('server').value = items.server;
