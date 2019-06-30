@@ -1,5 +1,4 @@
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
-
   chrome.tabs.query({active:true, windowType:"normal", currentWindow: true},function(d){
     var tabId = d[0].id;
     if (msg.icon) {
