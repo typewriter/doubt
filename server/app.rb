@@ -29,6 +29,8 @@ namespace '/doubt' do
   end
 
   post '/classify' do
+    GC.start
+
     headers 'Access-Control-Allow-Origin' => '*'
     param :key, String, format: /^[a-zA-Z0-9\-]+$/, required: true
     param :data, String
@@ -55,6 +57,8 @@ namespace '/doubt' do
   end
 
   post '/learn' do
+    GC.start
+
     headers 'Access-Control-Allow-Origin' => '*'
     param :key, String, format: /^[a-zA-Z0-9\-]+$/, required: true
     param :data, String
