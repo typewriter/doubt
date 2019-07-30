@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'sinatra'
+require 'sinatra/contrib'
 require 'sinatra/param'
 require 'sinatra/reloader' if development?
 
